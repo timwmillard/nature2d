@@ -45,9 +45,6 @@ int main(int argc, const char *argv[])
         lua_setglobal(L, "nature");
     }
 
-
-    stackDump(L);
-
     // execute the lua file
     int err = luaL_dofile(L, lua_file);
     if (err) {
