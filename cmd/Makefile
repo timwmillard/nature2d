@@ -1,19 +1,22 @@
 
-EXE = nature2d
+EXE= nature2d
 
-CC = clang
+CC= clang
 
-CFLAGS = 
-LIBS = -llua
+CFLAGS= 
+LIBS= -llua ../lib/libnature2d.a
+INCLUDES= -I ../lib
 
 all: $(EXE)
 
-debug: CFLAGS += -DDEBUG -g
+debug: CFLAGS += -DDEBUG # -g
 debug: $(EXE)
 
-$(EXE): main.c
-	$(CC) -o $(EXE) $(CFLAGS) $(LIBS) ../lib/external/open-simplex-noise.c main.c
+libnature2d.a:
+	cd ../lib && $(MAKE) $@
 
+$(EXE): main.c libnature2d.a
+	$(CC) -o $(EXE) $(CFLAGS) $(LIBS) main.c
 
 clean:
 	rm -rf $(EXE)

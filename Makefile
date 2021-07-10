@@ -1,8 +1,9 @@
 
-all: lib cmd
+all: nature2d
 
-lib:
-	@cd lib && $(MAKE) $@
-
-cmd:
+nature2d:
 	@cd cmd && $(MAKE) $@
+
+clean:
+	@cd cmd && $(MAKE) $@
+	@cd lib && $(MAKE) $@

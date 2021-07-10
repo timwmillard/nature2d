@@ -27,15 +27,36 @@ define dump_header
 endef
 
 
+CC= clang
+CFLAGS= 
+LIBS=
+
+AR= ar -r
+RM= rm -f
+
+NATURE_O= body.o open-simplex-noise.o
+NATURE_A= libnature2d.a
+
+all: $(NATURE_A)
+
+$(NATURE_A): $(NATURE_O)
+	$(AR) $(NATURE_A) $(NATURE_O)
+
+body.o: body.c
+	$(CC) $(CFLAGS) -c body.c
+
+open-simplex-noise.o: external/open-simplex-noise.c
+	$(CC) $(CFLAGS) -c external/open-simplex-noise.c
+
 test: test/nmath_test
 
-test/nmath_test:
+test/nmath_test: open-simplex-noise.o
 	$(call dump_header, $(DEBUG_DEFAULT_HDR_WIDTH), "Build", $(DEBUG_DEFAULT_HDR_CHAR), $(DEBUG_DEFAULT_HDR_FG))
-	clang -o tests/nmath_test external/open-simplex-noise.c tests/nmath_test.c
+	clang -o tests/nmath_test open-simplex-noise.o tests/nmath_test.c
 	$(call dump_header, $(DEBUG_DEFAULT_HDR_WIDTH), "Run Tests", $(DEBUG_DEFAULT_HDR_CHAR), $(DEBUG_DEFAULT_HDR_FG))
 	./tests/nmath_test
 
 
 clean:
+	$(RM) $(NATURE_O) $(NATURE_A)
 	rm -rf ./tests/nmath_test
-	

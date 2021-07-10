@@ -1,6 +1,8 @@
 #ifndef NMATH_H
 #define NMATH_H
 
+#include "external/open-simplex-noise.h"
+
 #if defined(__GNUC__)
 #   define    HUGE_VAL     __builtin_huge_val()
 #   define    HUGE_VALF    __builtin_huge_valf()
@@ -30,8 +32,10 @@ double min(double a, double b)
     return (a < b)? a : b;
 }
 
-#include "external/open-simplex-noise.h"
-
+/**
+ * Noise is wrapper for Open Simplex Noise functions
+ * 
+ */
 static struct osn_context *__osn_context__;
 
 void noise_seed(int seed)
