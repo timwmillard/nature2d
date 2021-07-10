@@ -2,9 +2,11 @@
 #define DEBUG_H
 
 #include <stdio.h>
+#include <stdarg.h>
+
 #include <lua.h>
 
-static void stackDump(lua_State *L)
+static void stackdump(lua_State *L)
 {
     int i;
     int top = lua_gettop(L);
@@ -15,7 +17,7 @@ static void stackDump(lua_State *L)
         {
 
         case LUA_TSTRING: /* strings */
-            printf("`%s'", lua_tostring(L, i));
+            printf("'%s'", lua_tostring(L, i));
             break;
 
         case LUA_TBOOLEAN: /* booleans */
@@ -26,6 +28,12 @@ static void stackDump(lua_State *L)
             printf("%g", lua_tonumber(L, i));
             break;
 
+        case LUA_TTABLE: /* table */
+            lua_getfield(L, i, "__name");
+            printf("table:%s", lua_tostring(L, -1));
+            lua_pop(L, 1);
+            break;
+
         default: /* other values */
             printf("%s", lua_typename(L, t));
             break;
@@ -33,6 +41,17 @@ static void stackDump(lua_State *L)
         printf("  "); /* put a separator */
     }
     printf("\n"); /* end the listing */
+}
+
+static void printstatck(lua_State *L, const char *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    vprintf(format, args);
+    va_end(args);
+
+    printf(" ");
+    stackdump(L);
 }
 
 #endif
