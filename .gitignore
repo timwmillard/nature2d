@@ -2,4 +2,10 @@
 .DS_Store
 
 .vscode
-examples
+/examples
+
+*.o
+*.a
+/cmd/nature2d
+
+*.mk
