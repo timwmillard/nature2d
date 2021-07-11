@@ -20,6 +20,7 @@ int luaopen_nature(lua_State *L)
         {"noise", l_noise},
         {"noise2", l_noise2},
         {"noise3", l_noise3},
+        {"newBody", l_new_body},
         {NULL, NULL}
     };
 
@@ -37,6 +38,4 @@ void register_global_functions(lua_State *L)
     // vec2
     lua_pushcfunction(L, l_vec2);
     lua_setglobal(L, "vec2");
-
-    l_body(L);
 }

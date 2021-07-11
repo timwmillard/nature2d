@@ -24,7 +24,7 @@ void body_apply_force(Body *body, Vec2 force);
 
 void body_apply_gravity(Body *body, Vec2 force);
 
-void body_update(Body *body);
+void body_update(Body *body, double dt);
 
 void body_destroy(Body *body);
 

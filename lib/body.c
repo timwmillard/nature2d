@@ -49,8 +49,9 @@ void body_apply_gravity(Body *body, Vec2 force)
     body->acc = vec2_add(body->acc, force);
 }
 
-void body_update(Body *body)
+void body_update(Body *body, double dt)
 {
+    body->acc = vec2_mult(body->acc, dt);
     body->vel = vec2_add(body->vel, body->acc);
     body->pos = vec2_add(body->pos, body->vel);
 
