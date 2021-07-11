@@ -7,7 +7,7 @@
 #include "debug.h"
 #endif
 
-#define BODY_METATABLE_NAME "BodyObject"
+#define BODY_METATABLE_NAME "nature.body"
 
 // void body_apply_force(Body *body, Vec2 force)
 int l_body_apply_force(lua_State *L)
@@ -44,10 +44,27 @@ int l_body_acceleration(lua_State *L)
     return 2;
 }
 
-int l_body_update(lua_State *L)
+int l_body_mass(lua_State *L)
 {
     Body *b = (Body *) luaL_checkudata(L, -1, BODY_METATABLE_NAME);
-    body_update(b, 1);
+    lua_pushnumber(L, b->mass);
+    return 2;
+}
+
+int l_body_update(lua_State *L)
+{
+    Body *b;
+    double dt;
+    int top = lua_gettop(L);
+    if (top == 2) {
+        b = (Body *) luaL_checkudata(L, -2, BODY_METATABLE_NAME);
+        dt = luaL_checknumber(L, -1);
+    } else {
+        b = (Body *) luaL_checkudata(L, -1, BODY_METATABLE_NAME);
+        dt = 1;
+    }
+
+    body_update(b, dt);
     return 0;
 }
 
@@ -55,7 +72,7 @@ int l_body_tostring(lua_State *L)
 {
     Body *b = (Body *) luaL_checkudata(L, -1, BODY_METATABLE_NAME);
 
-    lua_pushfstring(L, "x=%f, y=%f", b->pos.x, b->pos.y);
+    lua_pushfstring(L, "pos(%f, %f) vel(%f, %f)", b->pos.x, b->pos.y, b->vel.x, b->vel.y);
     return 1;
 }
 
@@ -74,16 +91,17 @@ int l_new_body(lua_State *L)
     luaL_newmetatable(L, BODY_METATABLE_NAME);
 
     lua_pushstring(L, "__index");
-    luaL_Reg bodyLib[] = {
+    luaL_Reg index[] = {
         {"applyForce", l_body_apply_force},
         {"position", l_body_position},
         {"velocity", l_body_velocity},
         {"acceleration", l_body_acceleration},
+        {"mass", l_body_mass},
         {"update", l_body_update},
         {"tostring", l_body_tostring},
         {NULL, NULL}
     };
-    luaL_newlib(L, bodyLib);
+    luaL_newlib(L, index);
     lua_settable(L, -3);
 
     lua_pushstring(L, "__tostring");
