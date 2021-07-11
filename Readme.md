@@ -1,5 +1,5 @@
 # Nature 2D
 
-I natural simulation framework for simulating nature.  Inspired by [Nature Of Code](https://natureofcode.com/) and the [LÖVE](https://love2d.org/) games framework.
+A natural simulation framework for simulating nature.  Inspired by [Nature Of Code](https://natureofcode.com/) and the [LÖVE](https://love2d.org/) games framework.
 
 It allows Lua scripting.
