@@ -15,7 +15,6 @@ int l_body_apply_force(lua_State *L)
     Body *b = (Body *) luaL_checkudata(L, -3, BODY_METATABLE_NAME);
     double x = luaL_checknumber(L, -2);
     double y = luaL_checknumber(L, -1);
-
     body_apply_force(b, vec2(x, y));
     return 0;
 }
@@ -71,7 +70,6 @@ int l_body_update(lua_State *L)
 int l_body_tostring(lua_State *L)
 {
     Body *b = (Body *) luaL_checkudata(L, -1, BODY_METATABLE_NAME);
-
     lua_pushfstring(L, "pos(%f, %f) vel(%f, %f)", b->pos.x, b->pos.y, b->vel.x, b->vel.y);
     return 1;
 }

@@ -23,7 +23,6 @@ int luaopen_nature(lua_State *L)
         {"newBody", l_new_body},
         {NULL, NULL}
     };
-
     luaL_newlib(L, natureLib);
     return 1;
 }

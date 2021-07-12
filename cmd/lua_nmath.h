@@ -11,7 +11,6 @@ int l_map(lua_State *L)
     double stop1 = luaL_checknumber(L, -3);
     double start2 = luaL_checknumber(L, -2);
     double stop2 = luaL_checknumber(L, -1);
-
     double result = map(value, start1, stop1, start2, stop2);
     lua_pushnumber(L, result);
     return 1;
@@ -21,7 +20,6 @@ int l_map(lua_State *L)
 int l_noiseseed(lua_State *L)
 {
     double seed = luaL_checknumber(L, -1);
-
     noise_seed(seed);
     return 0;
 }
@@ -30,7 +28,6 @@ int l_noiseseed(lua_State *L)
 int l_noise(lua_State *L)
 {
     double x = luaL_checknumber(L, -1);
-
     double result = noise(x);
     lua_pushnumber(L, result);
     return 1;
@@ -41,7 +38,6 @@ int l_noise2(lua_State *L)
 {
     double x = luaL_checknumber(L, -2);
     double y = luaL_checknumber(L, -1);
-
     double result = noise2(x, y);
     lua_pushnumber(L, result);
     return 1;
@@ -53,7 +49,6 @@ int l_noise3(lua_State *L)
     double x = luaL_checknumber(L, -3);
     double y = luaL_checknumber(L, -2);
     double z = luaL_checknumber(L, -1);
-
     double result = noise3(x, y, z);
     lua_pushnumber(L, result);
     return 1;

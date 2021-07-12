@@ -10,12 +10,9 @@ static void stackdump(lua_State *L)
 {
     int i;
     int top = lua_gettop(L);
-    for (i = 1; i <= top; i++)
-    { /* repeat for each level */
+    for (i = 1; i <= top; i++) { /* repeat for each level */
         int t = lua_type(L, i);
-        switch (t)
-        {
-
+        switch (t) {
         case LUA_TSTRING: /* strings */
             printf("'%s'", lua_tostring(L, i));
             break;
