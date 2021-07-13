@@ -4,7 +4,7 @@
 
 #include "test.h"
 
-#include "../nmath.h"
+#include "../nature2d.h"
 
 int main()
 {

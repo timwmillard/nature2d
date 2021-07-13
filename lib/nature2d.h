@@ -1,7 +1,7 @@
 #ifndef NATURE2D_H
 #define NATURE2D_H
 
-// #include <math.h>
+#include <math.h>
 
 #include "external/open-simplex-noise.h"
 
@@ -19,17 +19,17 @@
 
 #define INFINITY    HUGE_VALF
 
-double map(double value, double start1, double stop1, double start2, double stop2)
+static inline double map(double value, double start1, double stop1, double start2, double stop2)
 {
     return (value - start1) / (stop1 - start1) * (stop2 - start2) + start2;
 }
 
-double max(double a, double b)
+static inline double max(double a, double b)
 {
     return (a > b)? a : b;
 }
 
-double min(double a, double b)
+static inline double min(double a, double b)
 {
     return (a < b)? a : b;
 }
@@ -40,30 +40,31 @@ double min(double a, double b)
  */
 static struct osn_context *__osn_context__;
 
-void noise_seed(int seed)
+static inline void noise_seed(int seed)
 {
     open_simplex_noise(seed, &__osn_context__);
 }
 
-double noise(double x)
+static inline double noise(double x)
 {
     return open_simplex_noise2(__osn_context__, x, 0.0);
 }
 
-double noise2(double x, double y)
+static inline double noise2(double x, double y)
 {
     return open_simplex_noise2(__osn_context__, x, y);
 }
 
-double noise3(double x, double y, double z)
+static inline double noise3(double x, double y, double z)
 {
     return open_simplex_noise3(__osn_context__, x, y, z);
 }
 
-void destroy_noise()
+static inline void destroy_noise()
 {
     open_simplex_noise_free(__osn_context__);
 }
+
 
 /**
  * 2D Vector function
@@ -131,7 +132,9 @@ static inline Vec2 vec2_neg(const Vec2 v)
 /**
  * Body function
  * 
+ *
  */
+
 typedef struct Body {
     Vec2 pos;
     Vec2 vel;
@@ -140,7 +143,6 @@ typedef struct Body {
 } Body;
 
 Body *body_alloc();
-
 void body_init(Body *body, Vec2 pos, double mass);
 Body *body_new(Vec2 pos, double mass);
 Body *body_new_xy(double x, double y, double mass);

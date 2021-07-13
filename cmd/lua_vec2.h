@@ -1,7 +1,11 @@
 #include <lua.h>
 #include <lauxlib.h>
+
 #include "nature2d.h"
+
+#ifdef DEBUG
 #include "debug.h"
+#endif
 
 // typedef struct Vec2 {
 //     double x;
