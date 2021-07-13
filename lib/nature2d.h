@@ -67,6 +67,22 @@ static inline void destroy_noise()
 
 
 /**
+ * Noise that are thread safe
+ * 
+ * Noise *noise = noise_new();
+ * double x = noise_get(noise, 1);
+ * 
+ */
+typedef struct{
+    struct osn_context *context
+} Noise;
+Noise *noise_new();
+double noise_get(Noise *n, double x);
+double noise_get2(Noise *n, double x, double y);
+double noise_get3(Noise *n, double x, double y, double z);
+void noise_destroy(Noise *n);
+
+/**
  * 2D Vector function
  * 
  */
