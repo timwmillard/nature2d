@@ -1,6 +1,6 @@
 #include <lua.h>
 #include <lauxlib.h>
-#include "../lib/vec2.h"
+#include "nature2d.h"
 #include "debug.h"
 
 // typedef struct Vec2 {

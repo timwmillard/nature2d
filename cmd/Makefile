@@ -16,7 +16,7 @@ libnature2d.a:
 	cd ../lib && $(MAKE) $@
 
 $(EXE): main.c libnature2d.a
-	$(CC) -o $(EXE) $(CFLAGS) $(LIBS) main.c
+	$(CC) -o $(EXE) $(CFLAGS) $(INCLUDES) $(LIBS) main.c
 
 clean:
 	rm -rf $(EXE)

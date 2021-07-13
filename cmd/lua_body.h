@@ -1,7 +1,7 @@
 #include <lua.h>
 #include <lauxlib.h>
 
-#include "../lib/body.h"
+#include "nature2d.h"
 
 #ifdef DEBUG
 #include "debug.h"

@@ -1,7 +1,6 @@
 #include <stdlib.h>
 
-#include "body.h"
-#include "vec2.h"
+#include "nature2d.h"
 
 
 Body *body_alloc()
