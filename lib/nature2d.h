@@ -3,8 +3,6 @@
 
 #include <math.h>
 
-#include "external/open-simplex-noise.h"
-
 #if defined(__GNUC__)
 #   define    HUGE_VAL     __builtin_huge_val()
 #   define    HUGE_VALF    __builtin_huge_valf()
@@ -35,35 +33,15 @@ static inline double min(double a, double b)
 }
 
 /**
- * Noise is wrapper for Open Simplex Noise functions
+ * Open Simplex Noise function
  * 
  */
-static struct osn_context *__osn_context__;
 
-static inline void noise_seed(int seed)
-{
-    open_simplex_noise(seed, &__osn_context__);
-}
-
-static inline double noise(double x)
-{
-    return open_simplex_noise2(__osn_context__, x, 0.0);
-}
-
-static inline double noise2(double x, double y)
-{
-    return open_simplex_noise2(__osn_context__, x, y);
-}
-
-static inline double noise3(double x, double y, double z)
-{
-    return open_simplex_noise3(__osn_context__, x, y, z);
-}
-
-static inline void destroy_noise()
-{
-    open_simplex_noise_free(__osn_context__);
-}
+void noise_seed(int seed);
+double noise(double x);
+double noise2(double x, double y);
+double noise3(double x, double y, double z);
+void destroy_noise();
 
 
 /**

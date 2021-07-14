@@ -34,7 +34,7 @@ LIBS=
 AR= ar -r
 RM= rm -f
 
-NATURE_O= body.o open-simplex-noise.o
+NATURE_O= body.o open-simplex-noise.o noise.o
 NATURE_A= libnature2d.a
 
 all: $(NATURE_A)
@@ -47,6 +47,9 @@ body.o: body.c
 
 open-simplex-noise.o: external/open-simplex-noise.c
 	$(CC) $(CFLAGS) -c external/open-simplex-noise.c
+
+noise.o: noise.c
+	$(CC) $(CFLAGS) -c noise.c
 
 test: test/nmath_test
 
