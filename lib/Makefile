@@ -34,12 +34,12 @@ LIBS=
 AR= ar -r
 RM= rm -f
 
-NATURE_O= body.o open-simplex-noise.o noise.o
+NATURE_O= body.o open-simplex-noise.o noise.o bucket.o
 NATURE_A= libnature2d.a
 
 all: $(NATURE_A)
 
-$(NATURE_A): $(NATURE_O)
+$(NATURE_A): $(NATURE_O) nature2d.h
 	$(AR) $(NATURE_A) $(NATURE_O)
 
 body.o: body.c
@@ -50,6 +50,9 @@ open-simplex-noise.o: external/open-simplex-noise.c
 
 noise.o: noise.c
 	$(CC) $(CFLAGS) -c noise.c
+
+bucket.o: bucket.c
+	$(CC) $(CFLAGS) -c bucket.c
 
 test: test/nmath_test
 

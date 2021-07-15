@@ -14,6 +14,8 @@ void body_init(Body *body, Vec2 pos, double mass)
     body->vel = (Vec2) {0.0, 0.0};
     body->acc = (Vec2) {0.0, 0.0};
     body->mass = mass;
+
+    body->shapes = bucket_new(4);
 }
 
 Body *body_new(Vec2 pos, double mass)
@@ -35,6 +37,11 @@ Body *body_new_xy(double x, double y, double mass)
 {
     Vec2 pos = vec2(x, y);
     return body_new(pos, mass);
+}
+
+void body_add_shape(Body *body, Shape *shape)
+{
+    bucket_add(body->shapes, shape);
 }
 
 void body_apply_force(Body *body, Vec2 force)
