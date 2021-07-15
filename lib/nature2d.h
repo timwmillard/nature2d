@@ -137,17 +137,25 @@ typedef struct Rectangle {
     double height;
 } Rectangle;
 
+Rectangle *rectangle_new(double x, double y, double width, double height);
+Rectangle *rectangle_new_v(Vec2 start, Vec2 end);
+
 typedef struct Circle {
     Shape shape;
     Vec2 center; // center
     double radius; // radius
 } Circle;
 
+Circle *circle_new(double x, double y, double r);
+Circle *circle_new_v(Vec2 center, double r);
+
 typedef struct Polygon {
     Shape shape;
     BucketVec2 *points;
 } Polygon;
 
+Polygon *polygon_new(double x1, double y1, double x2, double y2, double x3, double y3, ...);
+Polygon *polygon_new_v(Vec2 x1, Vec2 x2, Vec2 x3, ...);
 
 /**
  * Body is a physics body that lives in an enviroment.
@@ -165,8 +173,10 @@ typedef struct Body {
 
 Body *body_alloc();
 void body_init(Body *body, Vec2 pos, double mass);
-Body *body_new(Vec2 pos, double mass);
-Body *body_new_xy(double x, double y, double mass);
+Body *body_new_v(Vec2 pos, double mass);
+Body *body_new(double x, double y, double mass);
+void body_add_shape(Body *body, Shape *shape);
+Shape *body_get_shape(Body *body, int i);
 void body_apply_force(Body *body, Vec2 force);
 void body_apply_gravity(Body *body, Vec2 force);
 void body_update(Body *body, double dt);

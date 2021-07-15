@@ -34,7 +34,7 @@ LIBS=
 AR= ar -r
 RM= rm -f
 
-NATURE_O= body.o open-simplex-noise.o noise.o bucket.o
+NATURE_O= body.o shapes.o open-simplex-noise.o noise.o bucket.o
 NATURE_A= libnature2d.a
 
 all: $(NATURE_A)
@@ -45,6 +45,9 @@ $(NATURE_A): $(NATURE_O) nature2d.h
 body.o: body.c
 	$(CC) $(CFLAGS) -c body.c
 
+shapes.o: shapes.c
+	$(CC) $(CFLAGS) -c shapes.c
+
 open-simplex-noise.o: external/open-simplex-noise.c
 	$(CC) $(CFLAGS) -c external/open-simplex-noise.c
 
@@ -54,14 +57,25 @@ noise.o: noise.c
 bucket.o: bucket.c
 	$(CC) $(CFLAGS) -c bucket.c
 
-test: test/nmath_test
+test: build_test_header build_test run_test_header run_test
 
-test/nmath_test: open-simplex-noise.o
+build_test_header:
 	$(call dump_header, $(DEBUG_DEFAULT_HDR_WIDTH), "Build", $(DEBUG_DEFAULT_HDR_CHAR), $(DEBUG_DEFAULT_HDR_FG))
-	clang -o tests/nmath_test open-simplex-noise.o tests/nmath_test.c
-	$(call dump_header, $(DEBUG_DEFAULT_HDR_WIDTH), "Run Tests", $(DEBUG_DEFAULT_HDR_CHAR), $(DEBUG_DEFAULT_HDR_FG))
-	./tests/nmath_test
 
+build_test: nmath_test shape_test
+
+run_test_header:
+	$(call dump_header, $(DEBUG_DEFAULT_HDR_WIDTH), "Run Tests", $(DEBUG_DEFAULT_HDR_CHAR), $(DEBUG_DEFAULT_HDR_FG))
+
+run_test:
+	./tests/nmath_test
+	./tests/shape_test
+
+nmath_test: open-simplex-noise.o tests/nmath_test.c
+	clang -o tests/nmath_test open-simplex-noise.o tests/nmath_test.c
+
+shape_test: tests/shape_test.c
+	clang -o tests/shape_test $(NATURE_A) tests/shape_test.c
 
 clean:
 	$(RM) $(NATURE_O) $(NATURE_A)

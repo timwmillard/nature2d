@@ -9,3 +9,6 @@
 /cmd/nature2d
 
 *.mk
+
+/lib/tests/nmath_test
+/lib/tests/shape_test

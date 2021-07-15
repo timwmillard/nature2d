@@ -19,7 +19,7 @@ void body_init(Body *body, Vec2 pos, double mass)
     body->shapes = bucket_new(4);
 }
 
-Body *body_new(Vec2 pos, double mass)
+Body *body_new_v(Vec2 pos, double mass)
 {
     // Can't have zero mass body
     if (mass==0)
@@ -34,15 +34,20 @@ Body *body_new(Vec2 pos, double mass)
     return body;
 }
 
-Body *body_new_xy(double x, double y, double mass)
+Body *body_new(double x, double y, double mass)
 {
     Vec2 pos = vec2(x, y);
-    return body_new(pos, mass);
+    return body_new_v(pos, mass);
 }
 
 void body_add_shape(Body *body, Shape *shape)
 {
     bucket_add(body->shapes, shape);
+}
+
+Shape *body_get_shape(Body *body, int i)
+{
+    return bucket_at(body->shapes, i);
 }
 
 void body_apply_force(Body *body, Vec2 force)
