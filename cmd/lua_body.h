@@ -35,11 +35,11 @@ int l_body_velocity(lua_State *L)
     return 2;
 }
 
-int l_body_acceleration(lua_State *L)
+int l_body_force(lua_State *L)
 {
     Body *b = (Body *) luaL_checkudata(L, -1, BODY_METATABLE_NAME);
-    lua_pushnumber(L, b->acc.x);
-    lua_pushnumber(L, b->acc.y);
+    lua_pushnumber(L, b->force.x);
+    lua_pushnumber(L, b->force.y);
     return 2;
 }
 
@@ -93,7 +93,7 @@ int l_new_body(lua_State *L)
         {"applyForce", l_body_apply_force},
         {"position", l_body_position},
         {"velocity", l_body_velocity},
-        {"acceleration", l_body_acceleration},
+        {"acceleration", l_body_force},
         {"mass", l_body_mass},
         {"update", l_body_update},
         {"tostring", l_body_tostring},

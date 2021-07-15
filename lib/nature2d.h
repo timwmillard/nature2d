@@ -165,7 +165,8 @@ Polygon *polygon_new_v(Vec2 x1, Vec2 x2, Vec2 x3, ...);
 typedef struct Body {
     Vec2 pos;
     Vec2 vel;
-    Vec2 acc;
+    Vec2 force;
+    Vec2 gravity;
     double mass;
 
     Bucket *shapes;
@@ -178,7 +179,7 @@ Body *body_new(double x, double y, double mass);
 void body_add_shape(Body *body, Shape *shape);
 Shape *body_get_shape(Body *body, int i);
 void body_apply_force(Body *body, Vec2 force);
-void body_apply_gravity(Body *body, Vec2 force);
+void body_set_gravity(Body *body, Vec2 force);
 void body_update(Body *body, double dt);
 void body_destroy(Body *body);
 
@@ -195,6 +196,6 @@ typedef struct {
     Shape *shape;
 
     Bucket *bodies;
-} Enviroment;
+} Environment;
 
 #endif

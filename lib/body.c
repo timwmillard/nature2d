@@ -12,8 +12,9 @@ Body *body_alloc()
 void body_init(Body *body, Vec2 pos, double mass)
 {
     body->pos = pos;
-    body->vel = (Vec2) {0.0, 0.0};
-    body->acc = (Vec2) {0.0, 0.0};
+    body->vel = vec2zero;
+    body->force = vec2zero;
+    body->gravity = vec2zero;
     body->mass = mass;
 
     body->shapes = bucket_new(4);
@@ -52,22 +53,30 @@ Shape *body_get_shape(Body *body, int i)
 
 void body_apply_force(Body *body, Vec2 force)
 {
-    force = vec2_div(force, body->mass);
-    body->acc = vec2_add(body->acc, force);
+    body->force = vec2_add(body->force, force);
 }
 
-void body_apply_gravity(Body *body, Vec2 force)
+void body_set_gravity(Body *body, Vec2 force)
 {
-    body->acc = vec2_add(body->acc, force);
+    body->gravity = force;
 }
 
 void body_update(Body *body, double dt)
 {
-    body->acc = vec2_mult(body->acc, dt);
-    body->vel = vec2_add(body->vel, body->acc);
+    // Newtons law
+    // F = ma or a = F / m
+    Vec2 acc = vec2_div(body->force, body->mass);
+
+    // Apply gravity (not effected by mass)
+    acc = vec2_add(acc, body->gravity);
+
+    // Mutiply by delta time
+    acc = vec2_mult(acc, dt);
+
+    body->vel = vec2_add(body->vel, acc);
     body->pos = vec2_add(body->pos, body->vel);
 
-    body->acc = vec2zero;
+    body->force = vec2zero;
 }
 
 void body_destroy(Body *body)
