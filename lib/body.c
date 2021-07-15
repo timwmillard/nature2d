@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
 #include "nature2d.h"
+#include "bucket.h"
 
 
 Body *body_alloc()

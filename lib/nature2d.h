@@ -105,34 +105,17 @@ typedef struct {
     int cap;
 } Bucket;
 
-Bucket *bucket_new(int size);
-void bucket_add(Bucket *bucket, void *obj);
-void *bucket_at(Bucket *bucket, int i);
-int bucket_len(Bucket *bucket);
-
 typedef struct {
     Vec2 *data;
     int len;
     int cap;
 } BucketVec2;
 
-BucketVec2 *bucket_vec2_new(int size);
-void bucket_vec2_add(BucketVec2 *bucket, Vec2 v);
-Vec2 bucket_vec2_at(BucketVec2 *bucket, int i);
-int bucket_vec2_len(BucketVec2 *bucket);
-
-
 typedef struct {
     double *data;
     int len;
     int cap;
 } BucketDouble;
-
-BucketDouble *bucket_double_new(int size);
-void bucket_double_add(BucketDouble *bucket, double v);
-double bucket_double_at(BucketDouble *bucket, int i);
-int bucket_double_len(BucketDouble *bucket);
-
 
 /**
  * Shapes
