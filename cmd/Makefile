@@ -3,8 +3,8 @@ EXE= nature2d
 
 CC= clang
 
-CFLAGS= 
-LIBS= -llua ../lib/libnature2d.a
+CFLAGS=`pkg-config --cflags lua`
+LIBS= `pkg-config --libs lua` ../lib/libnature2d.a
 INCLUDES= -I ../lib
 
 all: $(EXE)
