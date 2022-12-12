@@ -3,6 +3,7 @@
 #include <limits.h>
 
 #include "array.h"
+// #include "nature2d.h"
 
 void test_round_pow2()
 {
@@ -96,6 +97,15 @@ void test_array()
     arr = array_append(arr, data, sizeof(data));
     check_array(arr, 24, 32);
     print_array(arr);
+
+    // Body *body = body_new(15, 16, 17);
+    // arr = array_append(arr, body, sizeof(Body));
+    // print_array(arr);
+
+    // printf("sizeof(Body) = %lu\n", sizeof(Body));
+
+    // body = (Body*) &arr->data[0];
+    // printf("Body(%f, %f)[%f]\n", body->pos.x, body->pos.y, body->mass);
 }
 
 
