@@ -12,3 +12,5 @@
 
 /lib/tests/nmath_test
 /lib/tests/shape_test
+
+/lib/array_test
