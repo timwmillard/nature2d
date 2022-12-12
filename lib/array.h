@@ -37,24 +37,25 @@ size_t round_pow2(size_t v)
     return v;
 }
 
-Array *array_grow(Array *arr)
+Array *_array_grow(Array *arr)
 {
-    size_t new_size = round_pow2(arr->cap*2);
+    size_t new_size = round_pow2(arr->len*2);
+    arr->cap = new_size;
     arr = realloc(arr, sizeof(Array) + new_size);
     if (!arr) return NULL;
-    arr->cap = new_size;
     return arr;
 }
 
 Array *array_append(Array *arr, void *data, size_t len)
 {
-    if (arr->len + len > arr->cap)
-        arr = array_grow(arr);
+    int start = arr->len;
+    arr->len += len;
+    if (arr->len > arr->cap)
+        arr = _array_grow(arr);
 
     if (!arr) return NULL;
 
-    memcpy(arr->data+arr->len, data, len);
-    arr->len += len;
+    memcpy(arr->data+start, data, len);
     return arr;
 }
 
