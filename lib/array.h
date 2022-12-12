@@ -24,7 +24,7 @@ Array *array_make(size_t len, size_t cap)
 // compute the next highest power of 2 of 32-bit v
 // 64 bit only (TODO: should have guard clause or loop that checks sizeof(size_t))
 // https://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2
-size_t round_pow2(size_t v)
+unsigned long round_pow2(unsigned long v)
 {
     v--;
     v |= v >> 1;
